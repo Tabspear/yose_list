@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <script defer src="./main.js"></script>
+    <title>T0 DO LIST</title>
+  </head>
+  <body>
+     <button id="display"> Display Todos</button>
+     <button id="toggle">Toggle All</button>
+     <button id="add"> Add </button>
+     <input type="text" name="" id="input">
+     <button id="edit">Edit</button>
+     <input type="text" id="inputEdit">
+     <input type="text" id="outputEdit">
+     <button id="delete">Delete</button>
+     <input type="text" id="deleteItem">
+     <input type="text" id="deleteItem">
+     <button type="text" id="toggleBtn">Toggle</button>
+     <input type="text" id="toggledIT">
+
+
+      <ul id="todo_list">
+
+      </ul>
+
+    <script>
+      //Rewrite the code to use objects instead of strings
+      let todos = [
+        { todoText: "item1", complete: false },
+        { todoText: "item2", complete: false },
+        { todoText: "item3", complete: false },
+      ];
+
+      function displayTodos() {
+
+        for(let i = 0; i< todos.length; i++){
+          console.log(todos[i]);
+        }
+    
+
+        let todosUl = document.getElementById('todo_list');
+        todosUl.innerHTML = "";
+
+        for(let i = 0; i< todos.length;i++){
+          let todoLi = document.createElement("li");
+          todoLi.innerText = todos[i].todoText
+          todosUl.appendChild(todoLi);
+
+          if(todos[i].complete === true)
+          todoLi.innerText = "[x]" + todos[i].todoText
+          else if(todos[i].complete ===false )
+          todoLi.innerText ="[]" + todos[i].todoText
+          else
+          todoLi.innerText="[]" + todos[i].todoText
+        }
+
+      }
+
+      // function add(initialTodoText) {
+      //   todos.push({ todoText: initialTodoText, complete: false });
+      //   displayTodos();
+      // }
+      function add() {
+        let initialTodoText = addInput.value;
+        todos.push({ todoText: initialTodoText, complete: false });
+        addInput.value = "";
+        displayTodos();
+      }
+
+      // function toggle(position) {
+      //   if (todos[position].complete === false) {
+      //     todos[position].complete = true;
+      //   } else {
+      //     todos[position].complete === false;
+      //   }
+      // }
+
+      function toggle() {
+        let position = toggleInput.value
+        if (todos[position].complete === false) {
+          todos[position].complete = true;
+        } 
+        else {
+          todos[position].complete = false;
+        }
+
+        displayTodos();
+      }
+      
+      // function edit(position, newTodoText) {
+      //   todos[position].todoText = newTodoText;
+      //   displayTodos();
+      // }
+
+      function edit() {
+        let position = editInputA.value
+        let newTodoText = outputEdit.value;
+        todos[position].todoText = newTodoText;
+        displayTodos();
+      }
+
+   
+
+      function toggleAll() {
+        let completedTodos = 0;
+        //Find out the number of todos in total
+        for (let i = 0; i < todos.length; i++) {
+          if (todos[i].complete === true) {
+            completedTodos++;
+          }
+          if (completedTodos === todos.length) {
+            for (let i = 0; i < todos.length; i++) {
+              todos[i].complete = false;
+            }
+          } else {
+            for (let i = 0; i < todos.length; i++) {
+              todos[i].complete = true;
+            }
+          }
+        }
+        displayTodos();
+      }
+      function toggleAll() {
+        let completedTodos = 0;
+        //Find out the number of todos in total
+        for (let i = 0; i < todos.length; i++) {
+          if (todos[i].complete === true) {
+            completedTodos++;
+          }
+          if (completedTodos === todos.length) {
+            for (let i = 0; i < todos.length; i++) {
+              todos[i].complete = false;
+            }
+          } else {
+            for (let i = 0; i < todos.length; i++) {
+              todos[i].complete = true;
+            }
+          }
+        }
+        displayTodos();
+      }
+
+      toggleAll()
+
+      //This can stay for now
+      // function remove(position) {
+      //   todos.splice(position, 1);
+      //   displayTodos();
+      // }
+
+      function remove() {
+        let position = deleteInput.value
+        todos.splice(position, 1);
+        displayTodos();
+      }
+
+      let displayTodosButton = document.getElementById("display")
+      let toggleAllButton = document.getElementById("toggle")
+      let AddButton = document.getElementById("add")
+      let addInput = document.getElementById("input");
+      let deleteBtn =  document.getElementById('delete')
+      let editBtn = document.getElementById('edit')
+      let editInputA = document.getElementById('inputEdit')
+      let outputEdit = document.getElementById('outputEdit')
+      let deleteInput = document.getElementById('deleteItem')
+      let deleteItem = document.getElementById('deleteItem')
+      let toggleInput = document.getElementById('toggledIT')
+      let toggleBtn = document.getElementById('toggleBtn')
+       
+      displayTodosButton.addEventListener('click', displayTodos)
+      toggleAllButton.addEventListener('click', toggleAll)
+      AddButton.addEventListener('click', add)
+      deleteBtn.addEventListener("click", remove)
+      editBtn.addEventListener('click', edit)
+      toggleBtn.addEventListener('click', toggle)
+    </script>
+  </body>
+</html>
