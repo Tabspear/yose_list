@@ -1,3 +1,5 @@
+import "./TaskDay.css"
+
 const TaskDay = ()=>{
     return  (
         <p className="Task_day"><b>Lorem</b></p>
